@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Prediction</title>
+    <link rel="stylesheet" href="/src/output.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="min-h-screen bg-dark-gradient font-jakarta text-white">
+    <header
+        class="sticky top-0 z-50 border-b border-white/10 bg-blue-950/70 backdrop-blur-sm supports-[backdrop-filter]:bg-blue-950/55">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+            <div>
+                <p class="text-sm font-semibold tracking-[0.22em] text-ijo uppercase">Food Prediction</p>
+                <h1 class="mt-1 text-lg font-semibold text-white">Ingredient Classifier + Smart Recommendation</h1>
+            </div>
+            <a href="/docs"
+                class="rounded-full border border-ijo/40 bg-ijo/10 px-4 py-2 text-sm font-semibold text-ijo transition hover:bg-ijo/20">
+                API Docs
+            </a>
+        </div>
+    </header>
+
+    <main class="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-10">
+        <section class="grid gap-8 lg:grid-cols-1">
+            <div class="rounded-[2rem] border border-white/10 bg-black/25 p-8 shadow-2xl shadow-black/20 backdrop-blur-md">
+                <span
+                    class="inline-flex rounded-full border border-ijo/30 bg-ijo/10 px-4 py-2 text-xs font-semibold tracking-[0.2em] text-ijo uppercase">
+                    Live Demo
+                </span>
+                <h2 class="mt-6 max-w-3xl text-4xl font-bold leading-tight md:text-5xl">
+                    Upload gambar bahan makanan, lalu lihat prediksi dan rekomendasi penggunaannya.
+                </h2>
+                <p class="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">
+                    Frontend ini terhubung langsung ke backend FastAPI. Model akan mengenali objek pada gambar,
+                    kemudian AI akan menyiapkan rekomendasi teks singkat yang siap ditampilkan ke pengguna.
+                </p>
+                <div class="mt-8 grid gap-4 sm:grid-cols-3">
+                    <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+                        <p class="text-sm tracking-[0.18em] text-slate-400 uppercase">Step 1</p>
+                        <p class="mt-2 font-semibold text-white">Upload gambar</p>
+                    </div>
+                    <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+                        <p class="text-sm tracking-[0.18em] text-slate-400 uppercase">Step 2</p>
+                        <p class="mt-2 font-semibold text-white">Klasifikasi model</p>
+                    </div>
+                    <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+                        <p class="text-sm tracking-[0.18em] text-slate-400 uppercase">Step 3</p>
+                        <p class="mt-2 font-semibold text-white">Smart recommendation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid gap-8 lg:grid-cols-[0.92fr_1.08fr]">
+            <div class="rounded-[2rem] border border-ijo/20 bg-black/30 p-8 backdrop-blur-md">
+                <p class="text-sm font-semibold tracking-[0.22em] text-slate-400 uppercase">Upload Gambar</p>
+                <label for="imageUpload"
+                    class="mt-6 flex min-h-80 cursor-pointer flex-col items-center justify-center rounded-[1.75rem] border-2 border-dashed border-ijo/50 bg-slate-900/40 px-6 py-10 text-center transition hover:border-ijo hover:bg-ijo/5">
+                    <div class="flex h-20 w-20 items-center justify-center rounded-3xl border border-ijo/25 bg-ijo/10">
+                        <span class="text-4xl font-bold text-ijo">+</span>
+                    </div>
+                    <h3 class="mt-8 text-2xl font-bold text-white">Pilih atau drag gambar bahan makanan</h3>
+                    <p class="mt-4 max-w-md text-slate-400">
+                        Format JPG, PNG, atau WEBP. Gunakan gambar yang jelas agar model lebih mudah mengenali objek.
+                    </p>
+                    <input id="imageUpload" type="file" accept="image/png, image/jpeg, image/webp" class="hidden">
+                    <img id="previewImage"
+                        class="mt-8 hidden max-h-64 w-full rounded-2xl border border-white/10 object-contain"
+                        alt="Preview gambar upload">
+                </label>
+
+                <button id="analisisButton" type="button"
+                    class="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-ijo px-6 py-4 text-base font-bold text-slate-950 transition hover:bg-emerald-300 disabled:cursor-not-allowed disabled:bg-slate-600 disabled:text-slate-300">
+                    Analisis Sekarang
+                </button>
+                <p id="analysisStatus" class="mt-4 text-sm leading-relaxed text-slate-400">
+                    Backend siap. Upload gambar untuk memulai prediksi.
+                </p>
+            </div>
+
+            <div class="rounded-[2rem] border border-white/10 bg-slate-950/60 p-8 backdrop-blur-md">
+                <div class="flex items-start justify-between gap-4">
+                    <div>
+                        <p class="text-sm font-semibold tracking-[0.22em] text-slate-400 uppercase">Hasil Prediksi</p>
+                        <h3 id="resultHeading" class="mt-3 text-3xl font-bold text-white">Belum ada hasil</h3>
+                    </div>
+                </div>
+
+                <div id="emptyState" class="mt-8 rounded-3xl border border-white/10 bg-white/5 p-8 text-slate-400">
+                    Upload gambar lalu klik tombol analisis untuk melihat label prediksi, tingkat keyakinan model, dan
+                    recommendation text dari backend.
+                </div>
+
+                <div id="loadingState" class="mt-8 hidden rounded-3xl border border-ijo/20 bg-ijo/5 p-8">
+                    <div class="flex items-center gap-4">
+                        <div class="h-4 w-4 rounded-full bg-ijo animate-pulse"></div>
+                        <p class="text-lg font-semibold text-white">Memproses gambar dan menyiapkan recommendation...</p>
+                    </div>
+                    <p class="mt-3 text-slate-300">
+                        Model sedang melakukan inferensi, lalu backend akan meminta rekomendasi teks yang siap untuk frontend.
+                    </p>
+                </div>
+
+                <div id="errorState" class="mt-8 hidden rounded-3xl border border-red-400/25 bg-red-500/10 p-8">
+                    <p class="text-sm font-semibold tracking-[0.18em] text-red-200 uppercase">Terjadi masalah</p>
+                    <p id="errorMessage" class="mt-3 text-lg text-red-100">Gagal memproses permintaan.</p>
+                </div>
+
+                <div id="analysisResult" class="mt-8 hidden">
+                    <div class="space-y-6">
+                        <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+                            <p class="text-sm font-semibold tracking-[0.18em] text-slate-400 uppercase">Label Prediksi</p>
+                            <p id="predictionLabel" class="mt-4 text-4xl font-bold text-white">-</p>
+                            <p id="predictionSummary" class="mt-4 text-lg leading-relaxed text-slate-300">
+                                Hasil ringkasan akan muncul di sini.
+                            </p>
+                        </div>
+
+                        <div class="rounded-3xl border border-ijo/20 bg-ijo/5 p-6">
+                            <p class="text-sm font-semibold tracking-[0.18em] text-slate-400 uppercase">Smart Recommendation</p>
+                            <p id="recommendationText" class="mt-4 text-lg leading-relaxed text-white">
+                                Recommendation text akan muncul setelah prediksi berhasil.
+                            </p>
+                        </div>
+
+                        <div id="nutritionInfo" class="rounded-3xl border border-white/10 bg-white/5 p-6">
+                            <p class="text-sm font-semibold tracking-[0.18em] text-slate-400 uppercase">Info Gizi</p>
+                            <p class="mt-4 text-lg leading-relaxed text-slate-300">
+                                Informasi gizi akan muncul setelah prediksi berhasil.
+                            </p>
+                        </div>
+
+                        <div class="grid gap-4 md:grid-cols-2">
+                            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+                                <p class="text-sm text-slate-400">File</p>
+                                <p id="fileNameValue" class="mt-2 font-semibold text-white">-</p>
+                            </div>
+                            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+                                <p class="text-sm text-slate-400">Status</p>
+                                <p class="mt-2 font-semibold text-white">Berhasil dianalisis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-white/10 bg-blue-950/50 px-6 py-5 text-center text-sm text-white/60">
+        Frontend statis ini dilayani langsung oleh FastAPI dan memakai kontrak API yang sama dengan endpoint publik.
+    </footer>
+
+    <script type="module" src="/src/app.mjs"></script>
+</body>
+
+</html>

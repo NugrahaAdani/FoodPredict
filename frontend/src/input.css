@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .bg-dark-gradient {
+    background: linear-gradient(to bottom, #0f172a, #1e293b);
+  }
+
+  .text-dark-gradient {
+    background: linear-gradient(to bottom, #0f172a, #1e293b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}

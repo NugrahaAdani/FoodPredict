@@ -1,0 +1,20 @@
+{
+  "name": "food-prediction-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for Food Ingredient Classifier",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./src/output.css",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./src/output.css --watch",
+    "dev": "npm run watch:css"
+  },
+  "keywords": [
+    "tailwindcss",
+    "fastapi",
+    "frontend"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

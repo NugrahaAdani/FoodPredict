@@ -1,0 +1,11 @@
+{
+  "total_ingredients": 9,
+  "avg_calories": 151.33333333333334,
+  "high_protein_count": 4,
+  "low_fat_count": 5,
+  "categories": {
+    "Rendah Kalori": 2,
+    "Sedang Kalori": 3,
+    "Tinggi Kalori": 4
+  }
+}
