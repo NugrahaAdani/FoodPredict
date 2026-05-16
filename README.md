@@ -43,8 +43,8 @@ A complete machine learning application that classifies food ingredients from im
 
 ### 1. Clone Repository
 ```bash
-git clone <repository-url>
-cd coba
+git clone https://github.com/NugrahaAdani/FoodPredict.git
+cd FoodPredict
 ```
 
 ### 2. Setup Backend
@@ -82,7 +82,7 @@ uvicorn backend.main:app --reload
 ## 📁 Project Structure
 
 ```
-coba/
+FoodPredict/
 ├── 🔧 backend/              # FastAPI backend
 │   ├── main.py             # Main API server
 │   ├── services/           # Business logic
@@ -97,15 +97,8 @@ coba/
 │   │   ├── app.mjs         # JavaScript logic
 │   │   └── *.css           # Styling
 │   └── package.json        # Frontend dependencies
-├── 🤖 training/             # ML training pipeline
-│   ├── config.py           # Training configuration
-│   ├── models.py           # Model architecture
-│   ├── trainer.py          # Custom training loop
-│   └── data_utils.py       # Data preprocessing
 ├── 📊 dataset/              # Training data
-├── 📄 scripts/              # Utility scripts
 ├── 🧪 tests/                # Test suite
-└── 📚 docs/                 # Documentation
 ```
 
 ## 🔧 API Endpoints
@@ -165,18 +158,6 @@ POST /nutrition/recipe                # Calculate recipe nutrition
 - **Early Stopping**: Patience-based training termination
 - **TensorBoard Integration**: Real-time training monitoring
 
-### Training Pipeline
-```bash
-# Full training pipeline
-python train_model.py
-
-# Custom configuration
-python train_model.py --epochs 20 --no-plots
-
-# Inference only
-python train_model.py --inference-only --sample-image test.jpg
-```
-
 ## 🌐 Deployment
 
 ### Local Development
@@ -186,7 +167,7 @@ uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
 
 ### Production Deployment
 
-#### Railway (Recommended)
+#### Railway
 ```bash
 # Push to GitHub
 git push origin main
@@ -196,34 +177,12 @@ git push origin main
 # 2. Auto-deploy with railway.json config
 ```
 
-#### Docker
-```bash
-# Build image
-docker build -t food-classifier .
-
-# Run container
-docker run -p 8000:8000 food-classifier
-```
-
 ### Environment Variables
 ```bash
 # .env file
 GEMINI_API_KEY=your_gemini_api_key_here
 MODEL_PATH=backend/model/model.keras
 LABEL_PATH=backend/model/class_names.json
-```
-
-## 🧪 Testing
-
-```bash
-# Run all tests
-python -m pytest tests/
-
-# Run specific test
-python -m pytest tests/test_main.py
-
-# Run with coverage
-python -m pytest --cov=backend tests/
 ```
 
 ## 📊 Performance
@@ -276,16 +235,6 @@ uvicorn backend.main:app --reload --log-level debug
 4. **Push** to branch (`git push origin feature/amazing-feature`)
 5. **Open** Pull Request
 
-### Development Guidelines
-- Follow PEP 8 for Python code
-- Use TypeScript for new frontend features
-- Add tests for new functionality
-- Update documentation for API changes
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 🙏 Acknowledgments
 
 - **TensorFlow Team** - For the amazing ML framework
@@ -294,18 +243,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Google Gemini** - For AI-powered recommendations
 - **MobileNetV2** - For the efficient CNN architecture
 
-## 📞 Support
-
-- **Issues**: [GitHub Issues](https://github.com/your-username/food-classifier/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-username/food-classifier/discussions)
-- **Email**: your-email@example.com
-
----
-
 <div align="center">
-
-**Made with ❤️ for Indonesian Food Recognition**
-
-[⭐ Star this repo](https://github.com/your-username/food-classifier) • [🐛 Report Bug](https://github.com/your-username/food-classifier/issues) • [💡 Request Feature](https://github.com/your-username/food-classifier/issues)
-
-</div>
