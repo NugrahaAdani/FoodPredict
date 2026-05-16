@@ -347,8 +347,8 @@ uploads/
 backend/uploads/
 *.uploaded
 
-# Generated CSS
-frontend/src/output.css
+# Generated CSS (keep for production deployment)
+# frontend/src/output.css
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
