@@ -374,6 +374,7 @@ logs/
 
 # Railway
 .railway/
+railway-*.log
 
 # Vercel
 .vercel
@@ -381,9 +382,34 @@ logs/
 # Netlify
 .netlify/
 
+# Render
+.render/
+
+# Fly.io
+fly.toml.bak
+
 # Docker
 .dockerignore
 Dockerfile.prod
+docker-compose.override.yml
+
+# Deployment logs
+deployment.log
+build.log
+
+# Platform-specific files
+.platform/
+.ebextensions/
+.elasticbeanstalk/
+
+# CI/CD
+.github/workflows/*.yml.bak
+.gitlab-ci.yml.bak
+
+# Temporary deployment files
+deploy/
+dist/
+build/
 
 # ===================================
 # KEEP THESE FILES (EXCEPTIONS)

@@ -56,7 +56,13 @@ def frontend_index():
 
 @app.get("/health")
 def health_check():
-    return {"status": "ok"}
+    import os
+    return {
+        "status": "ok",
+        "port": os.getenv("PORT", "not_set"),
+        "host": "0.0.0.0",
+        "message": "Food Classifier API is running"
+    }
 
 
 @app.post("/predict")
