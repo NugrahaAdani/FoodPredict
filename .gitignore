@@ -79,7 +79,7 @@ venv.bak/
 *.tflite
 
 # TensorFlow/Keras
-*.keras
+# *.keras  # Commented out for deployment
 saved_model/
 *_savedmodel/
 model_checkpoints/
